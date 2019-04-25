@@ -1,0 +1,17 @@
+pipeline {
+    agent { docker { image 'maven:3.3.3' } }
+    stages {
+        stage('Build') {
+            steps {
+                //sh 'rm -rf  /var/jenkins_home/workspace/spring'
+                sh 'git clone https://github.com/bmanojpatel/SpringExample.git'
+                sh 'mvn clean install'
+                sh 'rm -rf  /var/jenkins_home/workspace/spring/SpringExample'
+                sh '''
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                '''
+            }
+        }
+    }
+}
